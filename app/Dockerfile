@@ -16,3 +16,7 @@ RUN make build
 # Stage 2: Serve with nginx
 FROM ghcr.io/kibalabs/app-serve:latest
 COPY --from=build /app/dist /usr/share/nginx/html
+
+ENV KRT_API_URL=
+
+EXPOSE 80

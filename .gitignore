@@ -42,6 +42,7 @@ dist/
 build/
 *.egg-info/
 .env*
+!.env.example
 .mypy_cache
 
 # JS
