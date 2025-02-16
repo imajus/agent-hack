@@ -17,14 +17,20 @@ GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 CDP_API_KEY_NAME = os.environ["CDP_API_KEY_NAME"]
 CDP_API_KEY_PRIVATE_KEY = os.environ["CDP_API_KEY_PRIVATE_KEY"]
 NETWORK_ID = os.environ["NETWORK_ID"]
+ALLOWED_ORIGIN = os.environ["ALLOWED_ORIGIN"]
 
-logging.basicConfig(level=logging.INFO)
-app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=[
+allowed_origins = [
     'http://localhost:3000',
     'https://demo.yieldseeker.xyz',
     'https://app.yieldseeker.xyz',
-], allow_origin_regex='https://.*\\.?(yieldseeker.xyz)')
+]
+
+if ALLOWED_ORIGIN:
+    allowed_origins.append(ALLOWED_ORIGIN)
+
+logging.basicConfig(level=logging.INFO)
+app = FastAPI()
+app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=allowed_origins, allow_origin_regex='https://.*\\.?(yieldseeker.xyz)')
 
 agentManager = AgentManager(
     geminiApiKey=GEMINI_API_KEY,
