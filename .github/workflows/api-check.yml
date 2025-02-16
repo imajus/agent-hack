@@ -1,4 +1,4 @@
-name: check
+name: Check API
 on:
   pull_request:
     branches: [main]
@@ -6,7 +6,7 @@ on:
       - 'api/**'
       - '.github/workflows/api-check.yml'
 jobs:
-  api-build:
+  check:
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE: build
